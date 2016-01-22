@@ -1,0 +1,12 @@
+#todo-container {
+  max-width: 640px;
+  margin: 20px auto 0px auto;
+}
+
+.todo-item {
+  margin-bottom: 15px;
+}
+
+.todo-item:last-child {
+  margin-bottom: 0px;
+}
