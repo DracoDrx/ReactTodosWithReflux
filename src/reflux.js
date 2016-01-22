@@ -13,7 +13,7 @@ var refluxActions = Reflux.createActions([
 
 var refluxStore = Reflux.createStore({
   listenables: refluxActions,
-  init: function() {
+  getInitialState: function() {
     var items = Store.get(LocalStorageKey);
     if (items) {
       this.items = items;
@@ -21,8 +21,6 @@ var refluxStore = Reflux.createStore({
     else {
       this.items = [];
     }
-  },
-  getItems: function() {
     return this.items;
   },
   onAddTodoItem: function(item) {

@@ -2,22 +2,12 @@ var React = require("react");
 var ReactDom = require("react-dom");
 var Header = require("./header");
 var ItemList = require("./itemlist");
+var Reflux = require("reflux");
 var RefluxStore = require("./reflux").store;
 var RefluxActions = require("./reflux").actions;
 
 var App = React.createClass({
-  getInitialState: function() {
-    var items = RefluxStore.getItems();
-    return ({
-      items: items
-    });
-  },
-  componentDidMount: function() {
-    this.unsubscribe = RefluxStore.listen(this.onItemsChanged);
-  },
-  componentWillUnmount: function() {
-    this.unsubscribe();
-  },
+  mixins: [Reflux.connect(RefluxStore, "items")],
   render: function() {
     return (
       <div className="panel panel-default">
@@ -36,11 +26,6 @@ var App = React.createClass({
         </div>
       </div>
     )
-  },
-  onItemsChanged: function(items) {
-    this.setState({
-      items: items
-    });
   },
   getItemListContents: function() {
     if (this.state.items.length > 0) {
